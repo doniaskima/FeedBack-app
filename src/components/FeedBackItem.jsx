@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Card from "./shared/Card"
 import PropTypes from "prop-types"
 import { FaTimes } from "react-icons/fa"
+import FeedBackContext from "../context/FeedBackContext";
 
 const FeedBackItem = ({ item, handleDelete }) => {
 
