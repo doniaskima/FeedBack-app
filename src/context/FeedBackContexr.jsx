@@ -11,6 +11,8 @@ export const FeedBackProvider = ({ children }) => {
         },
     ])
     return (
-        <FeedBackContext.Provider value={{}}>{children}</FeedBackContext.Provider>
+        <FeedBackContext.Provider value={{ feedBack }}>{children}</FeedBackContext.Provider>
     )
 }
+
+export default FeedBackContext;
