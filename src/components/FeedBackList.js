@@ -5,13 +5,15 @@ import { motion, AnimatePresence } from "framer-motion"
 import FeedBackContext from "../context/FeedBackContext"
 
 const FeedBackList = () => {
-    const { feedback } = useContext(FeedBackContext)
+    const { feedback, isLoading } = useContext(FeedBackContext)
 
-    if (!feedback || feedback.length === 0) {
+    if (!isLoading && (!feedback || feedback.length === 0)) {
         return <p>No Feedback available for now.</p>
     }
 
-    return (
+    return isLoading ? ( 
+        <h3>Loading...</h3>
+    ) :(
         <div className="feedback-list">
             <AnimatePresence>
                 {feedback.map((item) => (
