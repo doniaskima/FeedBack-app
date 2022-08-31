@@ -1,15 +1,22 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from './shared/Button';
 import Card from "./shared/Card";
 import FeedBackRating from "./FeedBackRating";
 import FeedBackContext from "../context/FeedBackContext"
  
 const FeedBackForm = ( ) => {
-    const { addFeedback } = useContext(FeedBackContext)
+    const { addFeedback, feedBackUpdate } = useContext(FeedBackContext)
     const [text, setText] = useState("");
     const [isBtnDisabled, setIsBtnDisabled] = useState(true)
     const [message, setMessage] = useState("")
     const [rating, setRating] = useState(10)
+    useEffect (() => {
+        if (feedBackUpdate.isOnUpdateMode) {
+            setIsBtnDisabled(false)
+            setText(feedBackUpdate.item.text)
+            setRating(feedBackUpdate.item.rating)
+        }
+    }, [feedBackUpdate])
     const handleInputChange = (e) => {
         setText(e.target.value)
         if (text === "") {
@@ -38,7 +45,7 @@ const FeedBackForm = ( ) => {
                 <FeedBackRating choose={(rating) => setRating(rating)} />
                 <div className="input-group">
                     <input type="text" placeholder="Write a Review" value={text} onChange={handleInputChange} />
-                    <Button type="submit" isDisabled={isBtnDisabled}>Send</Button>
+                    <Button type="submit" isDisabled={isBtnDisabled}/>
                 </div>
                 {message && <div className="message">{message}</div>}
             </form>
