@@ -5,7 +5,7 @@ import FeedBackRating from "./FeedBackRating";
 import FeedBackContext from "../context/FeedBackContext"
  
 const FeedBackForm = ( ) => {
-    const { addFeedback, feedBackUpdate } = useContext(FeedBackContext)
+    const { addFeedBack, feedBackUpdate, updateFeedBackContent } = useContext(FeedBackContext)
     const [text, setText] = useState("");
     const [isBtnDisabled, setIsBtnDisabled] = useState(true)
     const [message, setMessage] = useState("")
@@ -36,7 +36,13 @@ const FeedBackForm = ( ) => {
             text,
             rating,
         }
-        addFeedback(newFeedBack)
+        if (feedBackUpdate.isOnUpdateMode) {
+            updateFeedBackContent(feedBackUpdate.item.id, newFeedBack)
+        } else {
+            addFeedBack(newFeedBack)
+        }
+
+        setText("")
     }
     return (
         <Card>
