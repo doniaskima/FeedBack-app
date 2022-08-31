@@ -1,22 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Button from './shared/Button';
-import Card from "./shared/Card";
-import FeedBackRating from "./FeedBackRating";
+import React, { useContext, useEffect, useState } from "react"
 import FeedBackContext from "../context/FeedBackContext"
- 
-const FeedBackForm = ( ) => {
-    const { addFeedBack, feedBackUpdate, updateFeedBackContent } = useContext(FeedBackContext)
-    const [text, setText] = useState("");
+import FeedBackRating from "./FeedBackRating"
+import Button from "./shared/Button"
+import Card from "./shared/Card"
+
+const FeedBackForm = () => {
+    const [text, setText] = useState("")
+    const [rating, setRating] = useState(10)
     const [isBtnDisabled, setIsBtnDisabled] = useState(true)
     const [message, setMessage] = useState("")
-    const [rating, setRating] = useState(10)
-    useEffect (() => {
+
+    const { addFeedBack, feedBackUpdate, updateFeedBackContent } =
+        useContext(FeedBackContext)
+    useEffect(() => {
         if (feedBackUpdate.isOnUpdateMode) {
             setIsBtnDisabled(false)
             setText(feedBackUpdate.item.text)
             setRating(feedBackUpdate.item.rating)
         }
     }, [feedBackUpdate])
+
     const handleInputChange = (e) => {
         setText(e.target.value)
         if (text === "") {
@@ -30,6 +33,7 @@ const FeedBackForm = ( ) => {
             setIsBtnDisabled(false)
         }
     }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const newFeedBack = {
@@ -47,11 +51,17 @@ const FeedBackForm = ( ) => {
     return (
         <Card>
             <form onSubmit={handleSubmit}>
-                <h2>How do you rate your sevice with us ?</h2>
+                <h2>How d u rate ur service with us ?</h2>
                 <FeedBackRating choose={(rating) => setRating(rating)} />
+
                 <div className="input-group">
-                    <input type="text" placeholder="Write a Review" value={text} onChange={handleInputChange} />
-                    <Button type="submit" isDisabled={isBtnDisabled}/>
+                    <input
+                        type="text"
+                        placeholder="Write a Review"
+                        value={text}
+                        onChange={handleInputChange}
+                    />
+                    <Button type="submit" isDisabled={isBtnDisabled} />
                 </div>
                 {message && <div className="message">{message}</div>}
             </form>

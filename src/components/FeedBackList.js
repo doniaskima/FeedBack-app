@@ -1,12 +1,12 @@
 import React, { useContext } from "react"
 import FeedBackItem from "./FeedBackItem"
-import PropTypes from "prop-types"
 import { motion, AnimatePresence } from "framer-motion"
+
 import FeedBackContext from "../context/FeedBackContext"
 
 const FeedBackList = () => {
-    const { feedback } = useContext(FeedBackContext);
-  
+    const { feedback } = useContext(FeedBackContext)
+
     if (!feedback || feedback.length === 0) {
         return <p>No Feedback available for now.</p>
     }
@@ -21,18 +21,12 @@ const FeedBackList = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <FeedBackItem
-                            key={item.id}
-                            item={item}
-                        
-                        />
+                        <FeedBackItem key={item.id} item={item} />
                     </motion.div>
                 ))}
             </AnimatePresence>
         </div>
     )
 }
-
-
 
 export default FeedBackList

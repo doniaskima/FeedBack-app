@@ -1,15 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from "react"
 import FeedBackContext from "../context/FeedBackContext"
+
 const FeedBackRating = ({ choose }) => {
     const [selected, setSelected] = useState(10)
+
     const { feedBackUpdate } = useContext(FeedBackContext)
+
     useEffect(() => {
         setSelected(feedBackUpdate.item.rating)
     }, [feedBackUpdate])
+
     const handleChange = (e) => {
         setSelected(+e.currentTarget.value)
         choose(+e.currentTarget.value)
     }
+
     return (
         <ul className="rating">
             <li>
@@ -124,7 +129,6 @@ const FeedBackRating = ({ choose }) => {
             </li>
         </ul>
     )
-
 }
 
 export default FeedBackRating
