@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import { motion, AnimatePresence } from "framer-motion"
 import FeedBackContext from "../context/FeedBackContext"
 
-const FeedBackList = ({handleDelete }) => {
+const FeedBackList = () => {
     const { feedback } = useContext(FeedBackContext);
   
     if (!feedback || feedback.length === 0) {
@@ -24,7 +24,7 @@ const FeedBackList = ({handleDelete }) => {
                         <FeedBackItem
                             key={item.id}
                             item={item}
-                            handleDelete={handleDelete}
+                        
                         />
                     </motion.div>
                 ))}

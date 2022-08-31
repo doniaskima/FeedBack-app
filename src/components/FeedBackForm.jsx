@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Button from './shared/Button';
 import Card from "./shared/Card";
-import FeedBackRating from "./FeedBackRating"
-const FeedBackForm = ({ handleAdd }) => {
+import FeedBackRating from "./FeedBackRating";
+import FeedBackContext from "../context/FeedBackContext"
+ 
+const FeedBackForm = ( ) => {
+    const { addFeedback } = useContext(FeedBackContext)
     const [text, setText] = useState("");
     const [isBtnDisabled, setIsBtnDisabled] = useState(true)
     const [message, setMessage] = useState("")
@@ -26,7 +29,7 @@ const FeedBackForm = ({ handleAdd }) => {
             text,
             rating,
         }
-        handleAdd(newFeedBack)
+        addFeedback(newFeedBack)
     }
     return (
         <Card>
